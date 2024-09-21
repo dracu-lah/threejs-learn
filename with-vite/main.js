@@ -6,7 +6,12 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 const canvas = document.getElementById('draw');
 const renderer = new THREE.WebGLRenderer({canvas});
 renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+
+window.addEventListener('resize', () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+});
 
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
